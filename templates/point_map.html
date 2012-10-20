@@ -33,7 +33,7 @@
         var layers = {
             leaflet: new L.TileLayer("http://{s}.tile.cloudmade.com/d3dab3ca77424e1780b57f481e1df339/997/256/{z}/{x}/{y}.png"),
             paledawn: new L.TileLayer("http://{s}.tile.cloudmade.com/d3dab3ca77424e1780b57f481e1df339/998/256/{z}/{x}/{y}.png"),
-            midnight: new L.TileLayer("http://{s}.tile.cloudmade.com/d3dab3ca77424e1780b57f481e1df339/999/256/{z}/{x}/{y}.png", { attribution: 'Built by Brian Dailey' }),
+            midnight: new L.TileLayer("http://{s}.tile.cloudmade.com/d3dab3ca77424e1780b57f481e1df339/999/256/{z}/{x}/{y}.png"),
             gray: new L.TileLayer("http://{s}.tile.cloudmade.com/d3dab3ca77424e1780b57f481e1df339/20760/256/{z}/{x}/{y}.png")
         };
 
@@ -44,29 +44,25 @@
         var usa = new L.LatLng(39, -98);
         map.addLayer(layers.midnight).setView(bna, 14);
 
-        var crimes = new L.GeoJSON();
-
         function onEachFeature(feature, layer) {
-            // does this feature have a property named popupContent?
+            // bind geoJSON feature.description to a popup.
             if (feature.properties && feature.properties.description) {
                 layer.bindPopup(feature.properties.description);
             }
         }
 
         // Blockgroup heatmap
-        map.addLayer(new L.TileLayer("http://localhost:8080/crime-heatmap/{z}/{x}/{y}.png", {opacity: 0.5}));
-
-        map.addLayer(crimes);
+        // map.addLayer(new L.TileLayer("http://localhost:8080/crime-heatmap/{z}/{x}/{y}.png", {opacity: 0.5}));
 
         function redraw_map(event) {
-            var url = "/crimes.json?bbox=" + map.getBounds().toBBoxString(); // + "&type=" + $("span.total_hospital_beds").text();
+            var url = "/crimes.json?bbox=" + map.getBounds().toBBoxString();
             $.getJSON(url, function(data) {
                 $.each(data.features, function(i, feature) {
                     if ($.inArray(feature.id, crime_ids) == -1) {
                         // not a duplicate, so we can add it
                         L.geoJson(feature, {
                             pointToLayer: function (feature, latlng) {
-                                return L.circleMarker(latlng, {color: 'red', radius: 2, opacity: 0.5 });
+                                return L.circleMarker(latlng, {color: 'yellow', radius: 3, opacity: 0.5 });
                             },
                             onEachFeature: onEachFeature
                         }).addTo(map);

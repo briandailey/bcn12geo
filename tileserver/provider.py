@@ -1,4 +1,4 @@
-from demo.models import Block, Crime, Blockgroup
+from demo.models import Block, Crime
 from django.contrib.gis.geos import Polygon
 from PIL import Image, ImageDraw
 import ModestMaps

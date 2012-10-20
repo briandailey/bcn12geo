@@ -18,6 +18,7 @@ def crime_dots(request):
     return HttpResponse(json.dumps(geojson_dict), content_type='application/json')
 
 def crime_to_geojson(crime):
+    """ This could also be done with TileStache.Goodies.Providers.PostGeoJSON """
     return {
         "type": "Feature",
         "geometry": {
