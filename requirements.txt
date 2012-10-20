@@ -1,0 +1,12 @@
+Django==1.4.1
+GDAL==1.9.1
+ModestMaps==1.4.1
+OAM==0.2.3
+PIL==1.1.7
+TileStache==1.42.1
+Werkzeug==0.8.3
+geopy==0.94.2
+gunicorn==0.14.6
+ipython==0.13
+psycopg2==2.4.5
+wsgiref==0.1.2

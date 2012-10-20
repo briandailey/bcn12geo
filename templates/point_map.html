@@ -52,7 +52,7 @@
         }
 
         // Blockgroup heatmap
-        // map.addLayer(new L.TileLayer("http://localhost:8080/crime-heatmap/{z}/{x}/{y}.png", {opacity: 0.5}));
+        map.addLayer(new L.TileLayer("http://localhost:8080/crime-heatmap/{z}/{x}/{y}.png", {opacity: 0.5}));
 
         function redraw_map(event) {
             var url = "/crimes.json?bbox=" + map.getBounds().toBBoxString();

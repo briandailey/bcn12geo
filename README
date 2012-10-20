@@ -1,0 +1,18 @@
+## Setup
+Create a virtual environment and install the requirements.
+
+    pip install -r requirements.txt
+
+You will need PostgreSQL and PostGIS already installed with the user bcn, dbname bcn and password foobar.
+
+You may need to install GDAL, which is an adventure in itself and is too detailed to go into here.
+
+    # set up the django tables
+    python manage.py syncdb
+
+Load up the blockgroup and crimes database (there is a SQL dump in ./sql/).
+
+### Start up the tile server
+
+    alias tileserver='export PYTHONPATH=`pwd`:`cd ..` && export DJANGO_SETTINGS_MODULE=bcn12.settings && tilestache-server.py -c tileserver/tilestache.cfg'
+
